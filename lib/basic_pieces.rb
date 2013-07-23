@@ -16,6 +16,7 @@ class Piece
   def y
     @position.last
   end
+
 end
 
 class Slide < Piece
@@ -27,45 +28,44 @@ class Slide < Piece
 
   def move(direction, length)
     raise RuntimeError.new("not a valid direction") unless DIRECTIONS.include?(direction)
-    self.send(direction)
+    self.send(direction, length)
   end
 
   private
   def up_left(length)
-    position =
-    @position.first -= length
-    @position.last  += length
+    @position[0] -= length
+    @position[1]  += length
   end
 
   def up(length)
-    @position.last  += length
+    @position[1]   += length
   end
 
   def up_right(length)
-    @position.first += length
-    @position.last  += length
+    @position[0] += length
+    @position[1]   += length
   end
 
   def right(length)
-    @position.first += length
+    @position[0] += length
   end
 
   def down_right(length)
-    @position.first += length
-    @position.last  -= length
+    @position[0] += length
+    @position[1]   -= length
   end
 
   def down(length)
-    @position.first -= length
+    @position[0] -= length
   end
 
   def down_left(length)
-    @position.first -= length
-    @position.last  -= length
+    @position[0] -= length
+    @position[1]   -= length
   end
 
   def left(length)
-    @position.first -= length
+    @position[0] -= length
   end
 end
 

@@ -17,7 +17,7 @@ class Board
   def initialize
     @chess_board = []
     generate_board
-    generate_pieces
+    #generate_pieces
   end
 
   def generate_board
@@ -31,7 +31,7 @@ class Board
   end
 
   def generate_pieces
-    self[0, 0] = King.new
+    self[0, 0] = King.new([0,0], self)
     # TODO: Place pieces
   end
 
@@ -40,7 +40,7 @@ class Board
   end
 
   def []=(piece)
-    @chess_boardp[y][x] = piece
+    @chess_board[y][x] = piece
   end
 
   def [](x, y)
@@ -55,5 +55,8 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
-
+  king = King.new([0,4], board)
+  p king.position
+  king.move(:up_left)
+  p king.position
 end
