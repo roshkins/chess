@@ -103,8 +103,7 @@ class Bishop < Slide
   def verify_move(pos_new)
     return false unless super(pos_new)
     rel = @relative_position.map(&:abs)
-    return false if rel.first != rel.last || !rel.any?(&:zero?)
-# (pos_new.first != pos_new.last) || !(pos_new.any?(&:zero?))
+    return false if rel.first != rel.last
     true
   end
 end

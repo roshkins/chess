@@ -89,17 +89,17 @@ class Board
           #ret_str << tile.to_s if tile.colorize
           #if tile.nil?
             if x % 2 == 0 && y % 2 == 0
-              ret_str << tile.to_s.colorize(:background => :green)
-              ret_str << "  ".colorize(:background => :green) if tile.nil?
+              ret_str << "#{tile} ".to_s.colorize(:background => :green)
+              ret_str << " ".colorize(:background => :green) if tile.nil?
             elsif x % 2 == 1 && y % 2 == 0
-              ret_str << tile.to_s.colorize(:background => :red)
-              ret_str << " ".colorize(:background => :red)
+              ret_str << "#{tile} ".to_s.colorize(:background => :red)
+              ret_str << " ".colorize(:background => :red) if tile.nil?
             elsif x % 2 == 0 && y % 2 == 1
-              ret_str << tile.to_s.colorize(:background => :red)
-              ret_str << " ".colorize(:background => :red)
+              ret_str << "#{tile} ".to_s.colorize(:background => :red)
+              ret_str << " ".colorize(:background => :red) if tile.nil?
             else
-              ret_str << tile.to_s.colorize(:background => :green)
-              ret_str << "  ".colorize(:background => :green) if tile.nil?
+              ret_str << "#{tile} ".to_s.colorize(:background => :green)
+              ret_str << " ".colorize(:background => :green) if tile.nil?
             end
          # end
           ret_str << " "
