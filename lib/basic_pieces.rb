@@ -1,8 +1,8 @@
 class Piece
   attr_reader :position
 
-  def initialize(position, board)
-    @position, @board = position, board
+  def initialize(position, board, color)
+    @position, @board, @color = position, board, color
   end
   def position_relative=(rel)
     x = @position.first + rel.first
@@ -24,8 +24,8 @@ end
 class Slide < Piece
   DIRECTIONS = [:up_left, :up, :up_right,  :right, :down_right, :down, :down_left, :left ]
 
-  def initialize(position, board)
-    super(position, board)
+  def initialize(position, board, color)
+    super(position, board, color)
   end
 
   def move(direction, length)
@@ -35,44 +35,41 @@ class Slide < Piece
 
   private
   def up_left(length)
-    self.position_relative = -length, length
+    self.position_relative = -length, -length
     end
 
   def up(length)
-    @position[1]   += length
+    self.position_relative = 0, -length
   end
 
   def up_right(length)
-    @position[0] += length
-    @position[1]   += length
+    self.position_relative = length, -length
   end
 
   def right(length)
-    @position[0] += length
+    self.position_relative = length, 0
   end
 
   def down_right(length)
-    @position[0] += length
-    @position[1]   -= length
+    self.position_relative = length, length
   end
 
   def down(length)
-    @position[0] -= length
+    self.position_relative = 0, length
   end
 
   def down_left(length)
-    @position[0] -= length
-    @position[1]   -= length
+    self.position_relative = -length, length
   end
 
   def left(length)
-    @position[0] -= length
+    self.position_relative = -length, 0
   end
 end
 
 class King < Slide
-  def initialize(position, board)
-    super(position, board)
+  def initialize(position, board, color)
+    super(position, board, color)
   end
 
   def move(direction)
