@@ -55,7 +55,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
-  king = King.new([0,4], board)
+  king = King.new([4,0], board)
   p king.position
   king.move(:up_left)
   p king.position
