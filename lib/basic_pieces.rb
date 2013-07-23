@@ -4,7 +4,9 @@ class Piece
   def initialize(position, board)
     @position, @board = position, board
   end
-  def position=(x,y)
+  def position_relative=(rel)
+    x = @position.first + rel.first
+    y = @position.last  + rel.last
     @board[x, y] = self
     @position = [x, y]
   end
@@ -33,9 +35,8 @@ class Slide < Piece
 
   private
   def up_left(length)
-    @position[0] -= length
-    @position[1]  += length
-  end
+    self.position_relative = -length, length
+    end
 
   def up(length)
     @position[1]   += length

@@ -39,7 +39,7 @@ class Board
 
   end
 
-  def []=(piece)
+  def []=(x, y, piece)
     @chess_board[y][x] = piece
   end
 
