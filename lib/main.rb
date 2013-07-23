@@ -10,8 +10,9 @@ end
 class Board
   ## Making board array
 
-  def initialize()
-    @chess_board = generate_board
+  def initialize
+    @chess_board = []
+    generate_board
     generate_pieces
   end
 
@@ -19,8 +20,12 @@ class Board
     8.times do |row|
       row_board = []
       8.times do |col|
-
+        row_board << nil
+      end
+      @chess_board << row_board
+    end
   end
+
   def generate_pieces
     # TODO: Place pieces
   end
