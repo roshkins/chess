@@ -1,3 +1,4 @@
+require './basic_pieces.rb'
 class Chess
   ## UI stuff
 
@@ -30,11 +31,16 @@ class Board
   end
 
   def generate_pieces
+    self[0, 0] = King.new
     # TODO: Place pieces
   end
 
   def checkmate?
 
+  end
+
+  def []=(piece)
+    @chess_boardp[y][x] = piece
   end
 
   def [](x, y)
@@ -44,5 +50,10 @@ class Board
   def to_s
     # TODO: returns a string representation of the board
   end
+
+end
+
+if __FILE__ == $PROGRAM_NAME
+  board = Board.new
 
 end

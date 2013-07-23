@@ -4,7 +4,18 @@ class Piece
   def initialize(position, board)
     @position, @board = position, board
   end
+  def position=(x,y)
+    @board[x, y] = self
+    @position = [x, y]
+  end
 
+  def x
+    @position.first
+  end
+
+  def y
+    @position.last
+  end
 end
 
 class Slide < Piece
@@ -21,6 +32,7 @@ class Slide < Piece
 
   private
   def up_left(length)
+    position =
     @position.first -= length
     @position.last  += length
   end
