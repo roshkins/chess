@@ -1,6 +1,7 @@
 # coding: utf-8
+require 'debugger'
 class Piece
-  attr_reader :position
+  attr_reader :position, :color
 
   def initialize(position, board, color)
     @position, @board, @color = position, board, color
@@ -19,6 +20,11 @@ class Piece
 
   def y
     @position.last
+  end
+
+  def verify_move(pos_new)
+    @relative_position = pos_new.first - @position.first, pos_new.last - @position.last
+    return false    if @board[*pos_new] != nil && @board[*pos_new].color == self.color
   end
 
 end
@@ -43,6 +49,11 @@ class King < Slide
 
   def to_s
     "♔".send(@color)
+  end
+
+  def verify_move(pos_new)
+    return false unless super(pos_new)
+    @relative_position.map(&:abs).all?{ |coord| coord < 2 }
   end
 
 end
@@ -101,7 +112,7 @@ class Knight < Piece
   end
 
   def verify_move(pos_new)
-    relative_position = pos_new.first - @position.first, pos_new.last - @position.last
-    relative_position.map(&:abs).sort == [1,2]
+    super(pos_new)
+    @relative_position.map(&:abs).sort == [1,2]
   end
 end

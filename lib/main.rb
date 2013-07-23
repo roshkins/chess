@@ -77,6 +77,8 @@ class Board
     if self[*start_pos].verify_move(end_pos)
       self[*end_pos] = self[*start_pos]
       self[*start_pos] = nil
+    else
+      raise RuntimeError.new("Invalid move.")
     end
   end
 
@@ -109,6 +111,7 @@ end
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
   puts board
-  board.move([1,0], [2,2])
+  board.move([1, 0], [2, 2])
+  board.move([4, 0], [4, 1])
   puts board
 end
