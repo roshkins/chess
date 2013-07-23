@@ -109,14 +109,6 @@ end
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
   puts board
-  # king = King.new([3,0], board, :white)
-  # puts board
-  # king.move(:down)
-  # puts board
-  # king.move(:down_right)
-  # puts board
-  # king.move(:down_right)
-  # puts board
   board.move([1,0], [2,2])
   puts board
 end
