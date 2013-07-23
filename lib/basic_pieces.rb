@@ -24,7 +24,9 @@ class Piece
 
   def verify_move(pos_new)
     @relative_position = pos_new.first - @position.first, pos_new.last - @position.last
-    return false    if @board[*pos_new] != nil && @board[*pos_new].color == self.color
+    return false if @board[*pos_new] != nil && @board[*pos_new].color == self.color
+    p "passed super verify test for #{pos_new}"
+    true
   end
 
 end
@@ -39,7 +41,6 @@ class Slide < Piece
   def move(direction, length)
     raise RuntimeError.new("not a valid direction") unless DIRECTIONS.include?(direction)
   end
-
 end
 
 class King < Slide
@@ -54,6 +55,7 @@ class King < Slide
   def verify_move(pos_new)
     return false unless super(pos_new)
     @relative_position.map(&:abs).all?{ |coord| coord < 2 }
+
   end
 
 end
@@ -66,6 +68,10 @@ class Queen < Slide
   def to_s
     "♕".send(@color)
   end
+
+  def verify_move(pos_new)
+    return true
+  end
 end
 
 class Rook < Slide
@@ -77,6 +83,12 @@ class Rook < Slide
     "♖".send(@color)
   end
 
+  def verify_move(pos_new)
+    return false unless super(pos_new)
+    return false if pos_new.first != @position.first && pos_new.last != @position.last
+    true
+  end
+
 end
 
 class Bishop < Slide
@@ -86,6 +98,14 @@ class Bishop < Slide
 
   def to_s
     "♗".send(@color)
+  end
+
+  def verify_move(pos_new)
+    return false unless super(pos_new)
+    rel = @relative_position.map(&:abs)
+    return false if rel.first != rel.last || !rel.any?(&:zero?)
+# (pos_new.first != pos_new.last) || !(pos_new.any?(&:zero?))
+    true
   end
 end
 

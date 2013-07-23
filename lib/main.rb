@@ -55,9 +55,9 @@ class Board
       self[6, 0] = Knight.new([6, 0], self, :white)
       self[7, 0] = Rook.new(  [7, 0], self, :white)
 
-      8.times do |pawn_count|
-        self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
-      end
+     # 8.times do |pawn_count|
+      #  self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
+     # end
 
       8.times do |pawn_count|
         self[pawn_count, 6] = Pawn.new([pawn_count, 6], self, :black)
@@ -83,22 +83,25 @@ class Board
   end
 
   def to_s
-    # TODO: returns a string representation of the board
     ret_str = ""
     @board.each_with_index do |row, y|
       row.each_with_index do |tile, x|
-          ret_str << tile.to_s if tile
-          if tile.nil?
+          #ret_str << tile.to_s if tile.colorize
+          #if tile.nil?
             if x % 2 == 0 && y % 2 == 0
-              ret_str << "■".white
+              ret_str << tile.to_s.colorize(:background => :green)
+              ret_str << "  ".colorize(:background => :green) if tile.nil?
             elsif x % 2 == 1 && y % 2 == 0
-              ret_str << "▩".red.on_red
+              ret_str << tile.to_s.colorize(:background => :red)
+              ret_str << " ".colorize(:background => :red)
             elsif x % 2 == 0 && y % 2 == 1
-              ret_str << "▩".red.on_red
+              ret_str << tile.to_s.colorize(:background => :red)
+              ret_str << " ".colorize(:background => :red)
             else
-              ret_str << "■".white
+              ret_str << tile.to_s.colorize(:background => :green)
+              ret_str << "  ".colorize(:background => :green) if tile.nil?
             end
-          end
+         # end
           ret_str << " "
       end
       ret_str << "\n"
@@ -112,6 +115,11 @@ if __FILE__ == $PROGRAM_NAME
   board = Board.new
   puts board
   board.move([1, 0], [2, 2])
+  puts board
   board.move([4, 0], [4, 1])
+  puts board
+  board.move([0, 0], [0, 2])
+  puts board
+  board.move([2, 0], [3, 1])
   puts board
 end
