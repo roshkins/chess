@@ -8,16 +8,21 @@ class Piece
 end
 
 class Slide < Piece
-  DIRECTIONS = [:up, :down, :left, :right, :up_left, :up_right, :down_left, :down_right]
+  DIRECTIONS = [:up_left, :up, :up_right,  :right, :down_right, :down, :down_left, :left ]
 
   def initialize(position, board)
     super(position, board)
   end
 
   def move(direction, length)
-
+    self.send(direction)
   end
 
+  private
+  def up_left(length)
+
+
+  end
 end
 
 class King < Slide

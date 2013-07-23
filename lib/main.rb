@@ -4,6 +4,8 @@ class Chess
   def play
    @board = Board.new
    #make sure to downcase input
+   # x = ('a'..'z').to_a.index(letter)
+   # y = number
   end
 
 end
