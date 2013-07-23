@@ -11,12 +11,18 @@ class Board
   ## Making board array
 
   def initialize()
-
-    # TODO: generate_pieces
+    @chess_board = generate_board
+    generate_pieces
   end
 
+  def generate_board
+    8.times do |row|
+      row_board = []
+      8.times do |col|
+
+  end
   def generate_pieces
-    # TODO: generate_pieces
+    # TODO: Place pieces
   end
 
   def checkmate?
