@@ -1,7 +1,8 @@
 # coding: utf-8
 require 'debugger'
 class Piece
-  attr_reader :position, :color
+  attr_accessor :position
+  attr_reader :color
 
   def initialize(position, board, color)
     @position, @board, @color = position, board, color
@@ -23,7 +24,7 @@ class Piece
   end
 
   def verify_move(pos_new)
-    @relative_position = pos_new.first - @position.first, pos_new.last - @position.last
+    @relative_position = [pos_new.first - @position.first, pos_new.last - @position.last]
     return false if @board[*pos_new] != nil && @board[*pos_new].color == self.color
     p "passed super verify test for #{pos_new}"
     true
@@ -70,7 +71,10 @@ class Queen < Slide
   end
 
   def verify_move(pos_new)
-    return true
+    return false unless super(pos_new)
+    rel = @relative_position.map(&:abs)
+    return false if !@relative_position.any?(&:zero?) && rel.first != rel.last
+    true
   end
 end
 
@@ -85,7 +89,7 @@ class Rook < Slide
 
   def verify_move(pos_new)
     return false unless super(pos_new)
-    return false if pos_new.first != @position.first && pos_new.last != @position.last
+    return false if !@relative_position.any?(&:zero?) #if neither are zero
     true
   end
 
@@ -103,7 +107,7 @@ class Bishop < Slide
   def verify_move(pos_new)
     return false unless super(pos_new)
     rel = @relative_position.map(&:abs)
-    return false if rel.first != rel.last
+    return false if rel.first != rel.last #if abs.value are not equal
     true
   end
 end
