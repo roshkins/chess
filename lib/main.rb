@@ -46,7 +46,14 @@ class Board
   end
 
   def generate_pieces
-      self[0, 0] = Rook.new([0, 0], self, :white)
+      self[0, 0] = Rook.new(  [0, 0], self, :white)
+      #add knight here
+      self[2, 0] = Bishop.new([1, 0], self, :white)
+      self[3, 0] = Queen.new( [3, 0], self, :white)
+      self[4, 0] = King.new(  [4, 0], self, :white)
+      self[5, 0] = Bishop.new([5, 0], self, :white)
+     # self[6, 0] = put knight here
+      self[7, 0] = Rook.new(  [7, 0], self, :white)
 
   end
 
@@ -79,12 +86,12 @@ end
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
   puts board
-  king = King.new([3,0], board, :white)
-  puts board
-  king.move(:down)
-  puts board
-  king.move(:down_right)
-  puts board
-  king.move(:down_right)
-  puts board
+  # king = King.new([3,0], board, :white)
+  # puts board
+  # king.move(:down)
+  # puts board
+  # king.move(:down_right)
+  # puts board
+  # king.move(:down_right)
+  # puts board
 end
