@@ -73,6 +73,13 @@ class Board
       self[7, 7] = Rook.new(  [7, 7], self, :black)
   end
 
+  def move(start_pos, end_pos)
+    if self[*start_pos].verify_move(end_pos)
+      self[*end_pos] = self[*start_pos]
+      self[*start_pos] = nil
+    end
+  end
+
   def to_s
     # TODO: returns a string representation of the board
     ret_str = ""
@@ -110,6 +117,6 @@ if __FILE__ == $PROGRAM_NAME
   # puts board
   # king.move(:down_right)
   # puts board
-  board[1,1].move(:down, 2)
+  board.move([1,0], [2,2])
   puts board
 end

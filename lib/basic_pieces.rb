@@ -157,4 +157,9 @@ class Knight < Piece
   def to_s
     "♘".send(@color)
   end
+
+  def verify_move(pos_new)
+    relative_position = pos_new.first - @position.first, pos_new.last - @position.last
+    relative_position.map(&:abs).sort == [1,2]
+  end
 end
