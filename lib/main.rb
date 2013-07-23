@@ -18,9 +18,21 @@ class Board
   ## Making board array
 
   def initialize
-    @chess_board = []
+    @board = []
     generate_board
-    #generate_pieces
+    generate_pieces
+  end
+
+  def []=(x, y, piece)
+    @board[y][x] = piece
+  end
+
+  def [](x, y)
+    @board[y][x]
+  end
+
+  def checkmate?
+
   end
 
   def generate_board
@@ -29,31 +41,19 @@ class Board
       8.times do |col|
         row_board << nil
       end
-      @chess_board << row_board
+      @board << row_board
     end
   end
 
   def generate_pieces
-    # self[0, 0] = King.new([0,0], self)
-    # TODO: Place pieces
-  end
+      self[0, 0] = Rook.new([0, 0], self, :white)
 
-  def checkmate?
-
-  end
-
-  def []=(x, y, piece)
-    @chess_board[y][x] = piece
-  end
-
-  def [](x, y)
-    @chess_board[y][x]
   end
 
   def to_s
     # TODO: returns a string representation of the board
     ret_str = ""
-    @chess_board.each_with_index do |row, y|
+    @board.each_with_index do |row, y|
       row.each_with_index do |tile, x|
           ret_str << tile.to_s if tile
           if tile.nil?

@@ -103,8 +103,8 @@ class Rook < Slide
   end
 
   def move(direction, length)
-    DIRECTIONS = [:up, :down, :left, :right]
-    raise RuntimeError.new("invalid direction") unless DIRECTIONS.include?(direction)
+    valid_dir = [:up, :down, :left, :right]
+    raise RuntimeError.new("invalid direction") unless valid_dir.include?(direction)
     super(direction, length)
   end
 end
@@ -119,8 +119,8 @@ class Bishop < Slide
   end
 
   def move(direction, length)
-    DIRECTIONS = [:up_left, :up_right, :down_left, :down_right]
-    raise RuntimeError.new("invalid direction") unless DIRECTIONS.include?(direction)
+    valid_dir = [:up_left, :up_right, :down_left, :down_right]
+    raise RuntimeError.new("invalid direction") unless valid_dir.include?(direction)
     super(direction, length)
   end
 end
