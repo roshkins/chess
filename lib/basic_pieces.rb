@@ -82,3 +82,45 @@ class King < Slide
     super(direction, 1)
   end
 end
+
+class Queen < Slide
+  def initialize(position, board, color)
+    super(position, board, color)
+  end
+
+  def to_s
+    "♕".send(@color)
+  end
+end
+
+class Rook < Slide
+  def initialize(position, board, color)
+    super(position, board, color)
+  end
+
+  def to_s
+    "♖".send(@color)
+  end
+
+  def move(direction, length)
+    DIRECTIONS = [:up, :down, :left, :right]
+    raise RuntimeError.new("invalid direction") unless DIRECTIONS.include?(direction)
+    super(direction, length)
+  end
+end
+
+class Bishop < Slide
+  def initialize(position, board, color)
+    super(position, board, color)
+  end
+
+  def to_s
+    "♗".send(@color)
+  end
+
+  def move(direction, length)
+    DIRECTIONS = [:up_left, :up_right, :down_left, :down_right]
+    raise RuntimeError.new("invalid direction") unless DIRECTIONS.include?(direction)
+    super(direction, length)
+  end
+end
