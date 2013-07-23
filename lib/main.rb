@@ -3,6 +3,7 @@ class Chess
 
   def play
    @board = Board.new
+   #make sure to downcase input
   end
 
 end
@@ -34,9 +35,8 @@ class Board
 
   end
 
-  def [](letter, number)
-
-    # TODO: returns piece object
+  def [](x, y)
+    @chess_board[y][x]
   end
 
   def to_s
