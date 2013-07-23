@@ -58,6 +58,19 @@ class Board
       8.times do |pawn_count|
         self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
       end
+
+      8.times do |pawn_count|
+        self[pawn_count, 6] = Pawn.new([pawn_count, 6], self, :black)
+      end
+
+      self[0, 7] = Rook.new(  [0, 7], self, :black)
+      self[1, 7] = Knight.new([1, 7], self, :black)
+      self[2, 7] = Bishop.new([2, 7], self, :black)
+      self[3, 7] = Queen.new( [3, 7], self, :black)
+      self[4, 7] = King.new(  [4, 7], self, :black)
+      self[5, 7] = Bishop.new([5, 7], self, :black)
+      self[6, 7] = Knight.new([6, 7], self, :black)
+      self[7, 7] = Rook.new(  [7, 7], self, :black)
   end
 
   def to_s
@@ -97,4 +110,6 @@ if __FILE__ == $PROGRAM_NAME
   # puts board
   # king.move(:down_right)
   # puts board
+  board[1,1].move(:down, 2)
+  puts board
 end

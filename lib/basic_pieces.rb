@@ -126,14 +126,27 @@ class Bishop < Slide
 end
 
 #might need to change superclass
-class Pawn < Piece
+class Pawn < Slide
   def initialize(position, board, color)
     super(position, board, color)
+    @first_move = true
+    @directions = (color == :white) ? [:down, :down_left, :down_right] : [:up, :up_left, :up_right]
   end
 
   def to_s
     "♙".send(@color)
   end
+
+  def move(direction, length)
+    raise RuntimeError.new("Must go in correct direction") unless @directions.include?(direction)
+    if @first_move
+      super(direction, length) if length < 3
+      @first_move == false
+    else
+      super(direction, 1)
+    end
+  end
+
 end
 
 class Knight < Piece
