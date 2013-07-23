@@ -1,3 +1,4 @@
+# coding: utf-8
 class Piece
   attr_reader :position
 
@@ -5,6 +6,7 @@ class Piece
     @position, @board, @color = position, board, color
   end
   def position_relative=(rel)
+    @board[@position.first, @position.last] = nil
     x = @position.first + rel.first
     y = @position.last  + rel.last
     @board[x, y] = self
@@ -70,6 +72,10 @@ end
 class King < Slide
   def initialize(position, board, color)
     super(position, board, color)
+  end
+
+  def to_s
+    "♔".send(@color)
   end
 
   def move(direction)

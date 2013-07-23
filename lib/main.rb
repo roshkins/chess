@@ -1,4 +1,7 @@
+# coding: utf-8
 require './basic_pieces.rb'
+require 'colorize'
+
 class Chess
   ## UI stuff
 
@@ -31,7 +34,7 @@ class Board
   end
 
   def generate_pieces
-    self[0, 0] = King.new([0,0], self)
+    # self[0, 0] = King.new([0,0], self)
     # TODO: Place pieces
   end
 
@@ -49,18 +52,39 @@ class Board
 
   def to_s
     # TODO: returns a string representation of the board
+    ret_str = ""
+    @chess_board.each_with_index do |row, y|
+      row.each_with_index do |tile, x|
+          ret_str << tile.to_s if tile
+          if tile.nil?
+            if x % 2 == 0 && y % 2 == 0
+              ret_str << "■".white
+            elsif x % 2 == 1 && y % 2 == 0
+              ret_str << "▩".red.on_red
+            elsif x % 2 == 0 && y % 2 == 1
+              ret_str << "▩".red.on_red
+            else
+              ret_str << "■".white
+            end
+          end
+          ret_str << " "
+      end
+      ret_str << "\n"
+    end
+    ret_str + "\n"
   end
 
 end
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
+  puts board
   king = King.new([3,0], board, :white)
-  p king.position
-  king.move(:up_left)
-  p king.position
-  king.move(:up)
-  p king.position
+  puts board
+  king.move(:down)
+  puts board
   king.move(:down_right)
-  p king.position
+  puts board
+  king.move(:down_right)
+  puts board
 end
