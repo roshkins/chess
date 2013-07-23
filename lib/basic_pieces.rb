@@ -124,3 +124,24 @@ class Bishop < Slide
     super(direction, length)
   end
 end
+
+#might need to change superclass
+class Pawn < Piece
+  def initialize(position, board, color)
+    super(position, board, color)
+  end
+
+  def to_s
+    "♙".send(@color)
+  end
+end
+
+class Knight < Piece
+  def initialize(position, board, color)
+    super(position, board, color)
+  end
+
+  def to_s
+    "♘".send(@color)
+  end
+end

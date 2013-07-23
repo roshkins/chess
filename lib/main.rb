@@ -47,14 +47,17 @@ class Board
 
   def generate_pieces
       self[0, 0] = Rook.new(  [0, 0], self, :white)
-      #add knight here
-      self[2, 0] = Bishop.new([1, 0], self, :white)
+      self[1, 0] = Knight.new([1, 0], self, :white)
+      self[2, 0] = Bishop.new([2, 0], self, :white)
       self[3, 0] = Queen.new( [3, 0], self, :white)
       self[4, 0] = King.new(  [4, 0], self, :white)
       self[5, 0] = Bishop.new([5, 0], self, :white)
-     # self[6, 0] = put knight here
+      self[6, 0] = Knight.new([6, 0], self, :white)
       self[7, 0] = Rook.new(  [7, 0], self, :white)
 
+      8.times do |pawn_count|
+        self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
+      end
   end
 
   def to_s
