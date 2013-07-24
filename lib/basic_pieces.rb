@@ -33,14 +33,16 @@ class Piece
 end
 
 class Slide < Piece
-  DIRECTIONS = [:up_left, :up, :up_right,  :right, :down_right, :down, :down_left, :left ]
 
   def initialize(position, board, color)
     super(position, board, color)
   end
 
-  def move(direction, length)
-    raise RuntimeError.new("not a valid direction") unless DIRECTIONS.include?(direction)
+  def verify_move(pos_new)
+    return false unless super(pos_new)
+    if @relative_position.first < pos_new.first
+      (pos_new.first - @relative_position.first).times
+    end
   end
 end
 
@@ -56,7 +58,6 @@ class King < Slide
   def verify_move(pos_new)
     return false unless super(pos_new)
     @relative_position.map(&:abs).all?{ |coord| coord < 2 }
-
   end
 
 end

@@ -99,7 +99,9 @@ class Board
 
   def to_s
     ret_str = ""
+    ret_str << "  a  b  c  d  e  f  g  h\n"
     @board.each_with_index do |row, y|
+      ret_str << "#{y + 1} "
       row.each_with_index do |tile, x|
           if x % 2 == 0 && y % 2 == 0
             ret_str << "#{tile} ".to_s.colorize(:background => :green)
