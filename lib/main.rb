@@ -132,8 +132,9 @@ if __FILE__ == $PROGRAM_NAME
   board.move([1, 1], [1, 2])
   puts board
   board.move([1, 2], [1, 3])
-  board.move([1, 2], [1, 4])
-  board.move([1, 2], [1, 5])
-  board.move([1, 2], [2, 6])
+  board.move([1, 3], [1, 4])
+  board.move([1, 4], [1, 5])
+  puts board
+  board.move([1, 5], [2, 6])
   puts board
 end

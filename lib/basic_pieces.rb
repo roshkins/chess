@@ -134,18 +134,22 @@ class Pawn < Slide
     end
     if @first_move
       if @relative_position.last.abs < 3
-        if @relative_position.first == 0 || (!@board[*pos_new].nil? && @board[*pos_new].color != self.color)
-          @first_move = false
-        return true
-        end
+        @first_move = false
+        return verify_capture(pos_new)
       else
         return false
       end
     else
-      return @relative_position.last.abs < 2 && @relative_position.first == 0
+      return (@relative_position.last.abs < 2 && @relative_position.first == 0) || verify_capture(pos_new)
     end
   end
 
+  def verify_capture(pos_new)
+    if @relative_position.first == 0 || (!@board[*pos_new].nil? && @board[*pos_new].color != self.color)
+      return true
+    end
+    false
+  end
 end
 
 class Knight < Piece
