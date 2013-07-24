@@ -7,7 +7,8 @@ class Chess
   def initialize(human_players = 2)
     case human_players
     when 2
-
+      @white_player = HumanPlayer.new
+      @black_player = HumanPlayer.new
     when 1
     else
     end
@@ -15,6 +16,12 @@ class Chess
 
   def play
    @board = Board.new
+
+   while true
+     puts @board
+     input = @white_player.get_move
+     @board.move(*input)
+   end
    #make sure to downcase input
    # x = ('a'..'z').to_a.index(letter)
    # y = number
@@ -116,19 +123,23 @@ class Board
 end
 
 class HumanPlayer
-  attr_reader :name
+  #attr_reader :name
 
-  def initialize(name)
-    @name = name
+  def initialize#(name)
+    #@name = get_name
   end
 
   def get_move
-
+    print "Please enter two coordinate e.g 'a2 b3': "
+    input = gets.chomp.split.map { |el| el.split('')}
+    input = input.map{ |outer_array| [('a'..'z').to_a.index(outer_array.first), outer_array.last.to_i - 1]  }
   end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
-  board = Board.new
+  game = Chess.new(2)
+  game.play
   # puts board
 #   board.move([1, 0], [2, 2])
 #   puts board
@@ -142,14 +153,14 @@ if __FILE__ == $PROGRAM_NAME
 #   puts board
 #   board.move([3, 5], [6, 2])
 #   puts board
-
-  puts board
-  board.move([1, 1], [1, 2])
-  puts board
-  board.move([1, 2], [1, 3])
-  board.move([1, 3], [1, 4])
-  board.move([1, 4], [1, 5])
-  puts board
-  board.move([1, 5], [2, 6])
-  puts board
+  #
+  # puts board
+  # board.move([1, 1], [1, 2])
+  # puts board
+  # board.move([1, 2], [1, 3])
+  # board.move([1, 3], [1, 4])
+  # board.move([1, 4], [1, 5])
+  # puts board
+  # board.move([1, 5], [2, 6])
+  # puts board
 end
