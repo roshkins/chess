@@ -55,9 +55,9 @@ class Board
       self[6, 0] = Knight.new([6, 0], self, :white)
       self[7, 0] = Rook.new(  [7, 0], self, :white)
 
-     # 8.times do |pawn_count|
-      #  self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
-     # end
+      8.times do |pawn_count|
+        self[pawn_count, 1] = Pawn.new([pawn_count, 1], self, :white)
+      end
 
       8.times do |pawn_count|
         self[pawn_count, 6] = Pawn.new([pawn_count, 6], self, :black)
@@ -114,17 +114,23 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new
+  # puts board
+#   board.move([1, 0], [2, 2])
+#   puts board
+#   board.move([4, 0], [4, 1])
+#   puts board
+#   board.move([0, 0], [0, 2])
+#   puts board
+#   board.move([2, 0], [4, 2])
+#   puts board
+#   board.move([3, 0], [3, 5])
+#   puts board
+#   board.move([3, 5], [6, 2])
+#   puts board
+
   puts board
-  board.move([1, 0], [2, 2])
+  board.move([1, 1], [1, 2])
   puts board
-  board.move([4, 0], [4, 1])
-  puts board
-  board.move([0, 0], [0, 2])
-  puts board
-  board.move([2, 0], [4, 2])
-  puts board
-  board.move([3, 0], [3, 5])
-  puts board
-  board.move([3, 5], [6, 2])
+  board.move([1, 2], [3, 4])
   puts board
 end

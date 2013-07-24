@@ -71,6 +71,7 @@ class Queen < Slide
   end
 
   def verify_move(pos_new)
+    # Check for collision on way to Position.new
     return false unless super(pos_new)
     rel = @relative_position.map(&:abs)
     return false if !@relative_position.any?(&:zero?) && rel.first != rel.last
@@ -121,6 +122,28 @@ class Pawn < Slide
 
   def to_s
     "♙".send(@color)
+  end
+
+  def verify_move(pos_new)
+    return false unless super(pos_new)
+    case @color
+    when :white
+      return false if @relative_position.last < 0
+    when :black
+      return false if @relative_position.last > 0
+    end
+    if @first_move
+      if @relative_position.last.abs < 3
+        if @relative_position.first == 0 || (!@board[*pos_new].nil? && @board[*pos_new].color != self.color)
+          @first_move = false
+        return true
+        end
+      else
+        return false
+      end
+    else
+      return @relative_position.last.abs < 2 && @relative_position.first == 0
+    end
   end
 
 end
