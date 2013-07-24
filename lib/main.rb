@@ -3,7 +3,15 @@ require './basic_pieces.rb'
 require 'colorize'
 
 class Chess
-  ## UI stuff
+
+  def initialize(human_players = 2)
+    case human_players
+    when 2
+
+    when 1
+    else
+    end
+  end
 
   def play
    @board = Board.new
@@ -15,7 +23,6 @@ class Chess
 end
 
 class Board
-  ## Making board array
 
   def initialize
     @board = []
@@ -32,7 +39,7 @@ class Board
   end
 
   def checkmate?
-
+    #WRITE ME PLZ
   end
 
   def generate_board
@@ -87,29 +94,37 @@ class Board
     ret_str = ""
     @board.each_with_index do |row, y|
       row.each_with_index do |tile, x|
-          #ret_str << tile.to_s if tile.colorize
-          #if tile.nil?
-            if x % 2 == 0 && y % 2 == 0
-              ret_str << "#{tile} ".to_s.colorize(:background => :green)
-              ret_str << " ".colorize(:background => :green) if tile.nil?
-            elsif x % 2 == 1 && y % 2 == 0
-              ret_str << "#{tile} ".to_s.colorize(:background => :red)
-              ret_str << " ".colorize(:background => :red) if tile.nil?
-            elsif x % 2 == 0 && y % 2 == 1
-              ret_str << "#{tile} ".to_s.colorize(:background => :red)
-              ret_str << " ".colorize(:background => :red) if tile.nil?
-            else
-              ret_str << "#{tile} ".to_s.colorize(:background => :green)
-              ret_str << " ".colorize(:background => :green) if tile.nil?
-            end
-         # end
-          ret_str << " "
+          if x % 2 == 0 && y % 2 == 0
+            ret_str << "#{tile} ".to_s.colorize(:background => :green)
+            ret_str << " ".colorize(:background => :green) if tile.nil?
+          elsif x % 2 == 1 && y % 2 == 0
+            ret_str << "#{tile} ".to_s.colorize(:background => :red)
+            ret_str << " ".colorize(:background => :red) if tile.nil?
+          elsif x % 2 == 0 && y % 2 == 1
+            ret_str << "#{tile} ".to_s.colorize(:background => :red)
+            ret_str << " ".colorize(:background => :red) if tile.nil?
+          else
+            ret_str << "#{tile} ".to_s.colorize(:background => :green)
+            ret_str << " ".colorize(:background => :green) if tile.nil?
+          end
+        ret_str << " "
       end
       ret_str << "\n"
     end
     ret_str + "\n"
   end
+end
 
+class HumanPlayer
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def get_move
+
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
